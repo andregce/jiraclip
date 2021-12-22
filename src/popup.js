@@ -12,19 +12,32 @@ function copyTextToClipboard(text) {
     document.removeEventListener("copy", listener)
 }
 
+function formatTicketID(ticketId) {
+    return ticketId.replace('\[','').replace('\]','')
+}
+
+function formatTicketSummary(ticketSummary) {
+    return ticketSummary.replace(' - Retail - JIRA', '')
+}
+
 (function main() {
     chrome.windows.getCurrent({
         "populate": true
     }, function (currentWindow) {
         let jiraLinks = ''
         const jiraTabs = currentWindow.tabs.filter(tab => tab.url.startsWith(jiraUrl))
+
         jiraTabs.forEach(jiraTab => {
-            let ticketId = jiraTab.title.match(ticketIdRegex)
+            const ticketId = jiraTab.title.match(ticketIdRegex)
             const ticketSummary = jiraTab.title.replace(ticketIdRegex, '')
             if (ticketId?.length > 0) {
-                jiraLinks += "<a href='" + jiraTab.url + "'>" + ticketId[0].replace('\[','').replace('\]','') + "</a>" + " " + ticketSummary.replace(' - Retail - JIRA', '') + "<br>"
+                jiraLinks += "<a href='" + jiraTab.url + "'>" + formatTicketID(ticketId[0]) + "</a>"
+                jiraLinks += " "
+                jiraLinks += formatTicketSummary(ticketSummary)
+                jiraLinks += "<br>"
             }
         })
+
         copyTextToClipboard(jiraLinks)
     })
 }())
