@@ -12,6 +12,10 @@
     "action": {
         "default_popup": "popup.html"
     },
+    "content_scripts": [{
+        "matches": ["https://retail-jira.apple.com/browse/*"],
+        "js": ["functions.js", "header-link.js"]
+    }],
     "permissions": [
         "tabs",
         "activeTab",
