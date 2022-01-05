@@ -13,7 +13,7 @@ function getTicketSummary() {
 (function () {
     let ticketLink = ""
 
-    ticketLink += "<a href='" + jiraUrl + "/browse/" + "'>" + getTicketId() + "</a>"
+    ticketLink += "<a href='" + jiraUrl + "browse/" + getTicketId() + "'>" + getTicketId() + "</a>"
     ticketLink += " "
     ticketLink += getTicketSummary()
     ticketLink += "<br>"
