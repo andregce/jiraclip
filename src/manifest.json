@@ -3,7 +3,7 @@
 
     "name": "jiraclip",
     "description": "Copies a jira ticket ID, title, and link to the clipboard.",
-    "version": "1.0",
+    "version": "2.0.0",
     "icons": {
         "16": "extension_toolbar_icon16.png",
         "48": "extension_toolbar_icon48.png",
